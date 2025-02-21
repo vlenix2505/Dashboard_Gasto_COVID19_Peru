@@ -9,7 +9,12 @@ Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado c
 
 Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
 
-El informe está compuesto por 5 páginas (Principal, Temporal, Regional, Sectores, Actividad), cada una con información plasmada en gráficos y métricas clave para facilitar el análisis de los objetivos planteados.
+El informe está compuesto por 5 páginas:
+- Principal
+- Temporal
+- Regional
+- Sectores
+- Actividad
 
 ## 🏗️ Data Structure
 El modelo estrella está compuesto por las siguientes tablas:
