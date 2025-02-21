@@ -1,11 +1,15 @@
 # Gasto COVID-19 en Perú (2020-2025)
 
+_Vista de la Página Principal_
+
 ![image](https://github.com/user-attachments/assets/3e0e01c5-df30-43c6-aaeb-4db6b03e166d)
 
 ## 📌 Project Background
-Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos extraídos desde archivos CSV disponibles en línea.
+Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea.
 
 Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
+
+El informe está compuesto por 5 páginas (Principal, Temporal, Regional, Sectores, Actividad), cada una con información plasmada en gráficos y métricas clave para facilitar el análisis de los objetivos planteados.
 
 ## 🏗️ Data Structure
 El modelo estrella está compuesto por las siguientes tablas:
