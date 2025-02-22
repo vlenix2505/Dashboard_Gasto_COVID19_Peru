@@ -74,7 +74,7 @@ num_registros = cursor.fetchone()[0]
 
 fecha_actual = datetime.now().strftime("%Y%m%d_%H%M%S")
 backup_file = f"backup_hechos_{fecha_actual}.csv"
-folder_id = '10YQdetxf3c2Qh1cT46WJb9nYJplcb_P2'
+folder_id = os.getenv('FOLDER_ID')
 
 if num_registros > 0:
     df_backup = pd.read_sql("SELECT * FROM Hechos", engine)
