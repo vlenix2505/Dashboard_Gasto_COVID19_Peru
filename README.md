@@ -10,11 +10,13 @@ Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado c
 Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
 
 El informe está compuesto por 5 páginas:
-- Principal
-- Temporal
-- Regional
-- Sectores
-- Actividad
+
+- [Principal](paginasPowerBI/1-Principal.jpg): Página que muestra un resumen general de la Ejecución pública del Gasto de COVID 19.
+- [Temporal](paginasPowerBI/2-Temporal.jpg): Página que muestra la evolución temporal del Gasto de COVID 19, analizando la variación porcentual mensual y un resumen de los montos efectuados.
+- [Regional](paginasPowerBI/3-Regional.jpg): Página que muestra la distribución del gasto ejecutado por departamento, resaltando las regiones con mayor inversión y visualizando el volumen del porcentaje ejecutado en un mapa interactivo.
+- [Sectores](paginasPowerBI/4-Sectores.jpg): Página que muestra la distribución del gasto COVID-19 por sector, destacando a Salud y Desarrollo e Inclusión Social como los principales ejecutores de recursos.
+- [Actividad](paginasPowerBI/5-Actividad.jpg): Página que analiza el gasto según programas y actividades, resaltando donde se efectuaron las mayores inversiones.
+
 
 ## 🏗️ Data Structure
 El modelo estrella está compuesto por las siguientes tablas:
