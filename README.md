@@ -141,5 +141,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 - Se logró centralizar la información del gasto COVID-19 en **SQL Server**, optimizando el análisis en **Power BI**.
 - Se implementó una estrategia de actualización **automática y transaccional**, asegurando la integridad de los datos.
 - Se habilitó un mecanismo de **backup en Google Drive** para proteger la información histórica.
+- **Python** fue utilizado como herramienta principal para la extracción, transformación y carga (ETL) de los datos.
 
 📌 **Este proyecto proporciona una visión completa del impacto financiero del COVID-19 en el Perú, facilitando la toma de decisiones informadas en futuras crisis sanitarias.**
