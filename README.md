@@ -2,7 +2,8 @@
 
 _Vista de la Página Principal_
 
-![1-Principal](https://github.com/user-attachments/assets/2214f1ed-65f2-40dc-bd26-a9dae60edc96)
+![1-Principal](https://github.com/user-attachments/assets/4aa1d0e3-7261-48f8-9701-5f0e16604d99)
+
 
 ## 📌 Project Background
 Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, usando un código en Python.
