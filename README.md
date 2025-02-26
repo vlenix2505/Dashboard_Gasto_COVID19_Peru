@@ -2,10 +2,10 @@
 
 _Vista de la Página Principal_
 
-![image](https://github.com/user-attachments/assets/3e0e01c5-df30-43c6-aaeb-4db6b03e166d)
+![1-Principal](https://github.com/user-attachments/assets/2214f1ed-65f2-40dc-bd26-a9dae60edc96)
 
 ## 📌 Project Background
-Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea.
+Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, usando un código en Python.
 
 Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
 
@@ -17,6 +17,7 @@ El informe está compuesto por 5 páginas:
 - [Sectores](paginasPowerBI/4-Sectores.jpg): Página que muestra la distribución del gasto COVID-19 por sector, destacando a Salud y Desarrollo e Inclusión Social como los principales ejecutores de recursos.
 - [Actividad](paginasPowerBI/5-Actividad.jpg): Página que analiza el gasto según programas y actividades, resaltando donde se efectuaron las mayores inversiones.
 
+Puedes acceder al dashboard online en [este link](https://app.powerbi.com/view?r=eyJrIjoiMjcwZTgzNTktZWE0NS00NzI4LTljMzAtNWMxY2E4MGYwZDE1IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9&pageName=458373886d0d88309990)
 
 ## 🏗️ Data Structure
 El modelo estrella está compuesto por las siguientes tablas:
@@ -50,24 +51,24 @@ El análisis realizado en **Power BI** permitió responder las siguientes pregun
    - Se observó un pico de inversión en 2020 y 2021, con una disminución progresiva en los años siguientes.
 
 2️⃣ **¿Cómo se distribuye el gasto entre los niveles de gobierno?**
-   - El **Gobierno Nacional** ejecutó el mayor porcentaje del gasto, seguido por los **Gobiernos Regionales** y **Locales**.
+   - El **Gobierno Nacional** ejecutó el mayor porcentaje del gasto, representando el 80.34% del gasto ejecutado anual, seguido por los **Gobiernos Regionales** (18.05%) y **Locales**(1.61%).
 
 3️⃣ **¿Qué actividades, obras o acciones de inversión han sido prioritarias?**
    - Programas como **Asignaciones Presupuestarias que No Resultan en Productos** y **Reducción de Vulnerabilidad y Atención de Emergencias** recibieron la mayor cantidad de fondos.
 
 4️⃣ **¿Qué sectores y pliegos han ejecutado más recursos?**
-   - **Desarrollo e Inclusión Social**, **Salud** y **Trabajo y Promoción del Empleo** lideraron la ejecución de gasto.
+   - **Desarrollo e Inclusión Social**, **Salud** y **Trabajo y Promoción del Empleo** lideraron el TOP 3 en la ejecución de gasto. Por otro lado, el **Ministerio de Desarrollo e Inclusión Social**, **M. de Trabajo y Promoción del Empleo y M. De Salud** encabezaron el ranking de Pliegos por gasto ejecutado 
 
 5️⃣ **¿Cómo se compara el presupuesto inicial (MONTO_PIA) con el gasto ejecutado (MONTO_DEVENGADO)?**
    - Se logró un alto porcentaje de ejecución (91.74% en promedio), con variaciones entre sectores y años.
 
 6️⃣ **¿Qué productos o proyectos han recibido más recursos?**
-   - **Programas de atención en salud** y **proyectos de infraestructura hospitalaria** fueron prioritarios en la distribución del presupuesto.
+   - **Asignaciones Presuppuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.59%.
 
 7️⃣ **¿Cómo se distribuye el gasto por departamentos?**
-   - **Lima, Piura, La Libertad y Cusco** fueron los departamentos con mayor ejecución de recursos.
+   - **Lima, La Libertad y Piura** fueron los departamentos con mayor ejecución de recursos.
    - Los departamentos amazónicos y con menor infraestructura presentaron menor ejecución presupuestaria.
-
+   - El TOP 3 de departamentos con mayor cantidad de Proyectos únicos fueron **Lima, Ancash** y **La Libertad**, en el orden respectivo. Sin embargo, pese a que Ancash está involucrado en 6 proyectos, ocupa el puesto 6 en el ranking de gasto ejecutado (aprox S/.522 mil), siendo el puesto 2 correspondiente a Piura, departamento con solo 11 proyectos (aprox S/.654 mil).
 
 ## 🛠️ Technical Implementation
 
