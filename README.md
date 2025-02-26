@@ -32,9 +32,9 @@ El modelo estrella está compuesto por las siguientes tablas:
 - **Hechos:** Contiene los montos financieros asociados a la ejecución del gasto, incluyendo:
   - **MONTO_PIA** (Presupuesto Inicial de Apertura)
   - **MONTO_PIM** (Presupuesto Institucional Modificado)
-  - **MONTO_CERTIFICADO** (Certificaciones Presupuestarias emitidas)
-  - **MONTO_COMPROMETIDO** (Monto comprometido para ejecución)
-  - **MONTO_DEVENGADO** (Monto efectivamente ejecutado)
+  - **MONTO_CERTIFICADO** (Es el dinero que se ha reservado para gastar)
+  - **MONTO_COMPROMETIDO** (Monto comprometido para ejecución, en contratos)
+  - **MONTO_DEVENGADO** (Gasto efectivamente ejecutado)
   - **MONTO_GIRADO** (Monto pagado a proveedores)
 
     ![image](https://github.com/user-attachments/assets/676644c6-786b-4150-8acf-b3be68091cc4)
@@ -63,7 +63,7 @@ El análisis realizado en **Power BI** permitió responder las siguientes pregun
    - Se logró un alto porcentaje de ejecución (91.74% en promedio), con variaciones entre sectores y años.
 
 6️⃣ **¿Qué productos o proyectos han recibido más recursos?**
-   - **Asignaciones Presuppuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.59%.
+   - **Asignaciones Presupuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.59%.
 
 7️⃣ **¿Cómo se distribuye el gasto por departamentos?**
    - **Lima, La Libertad y Piura** fueron los departamentos con mayor ejecución de recursos.
