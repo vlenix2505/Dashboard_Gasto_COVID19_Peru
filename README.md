@@ -146,5 +146,4 @@ from oauth2client.service_account import ServiceAccountCredentials
 - Se implementó una estrategia de actualización **automática y transaccional**, asegurando la integridad de los datos.
 - Se habilitó un mecanismo de **backup en Google Drive** para proteger la información histórica.
 - **Python** fue utilizado como herramienta principal para la extracción, transformación y carga (ETL) de los datos.
-
-📌 **Este proyecto proporciona una visión completa del impacto financiero del COVID-19 en el Perú, facilitando la toma de decisiones informadas en futuras crisis sanitarias.**
+- Este proyecto proporciona una visión completa del impacto financiero del COVID-19 en el Perú, considerando factores clave como el tiempo, geografía, entidad y actividad realizada, lo cual facilita la toma de decisiones informadas en futuras crisis sanitarias.
