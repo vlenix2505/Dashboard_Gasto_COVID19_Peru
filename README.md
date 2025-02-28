@@ -21,7 +21,9 @@ El informe está compuesto por 5 páginas:
 Puedes acceder al dashboard online en [este link](https://app.powerbi.com/view?r=eyJrIjoiMjcwZTgzNTktZWE0NS00NzI4LTljMzAtNWMxY2E4MGYwZDE1IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9&pageName=458373886d0d88309990)
 
 ## 🏗️ Data Structure
-El modelo estrella está compuesto por las siguientes tablas (Detallado a profundidad en el archivo [DocumentacionDatamart]()):
+La estructura de los datos se encuentra profundamente detallada en el archivo de [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf). 
+
+Como resumen, el modelo estrella está compuesto por las siguientes tablas:
 
 ### 🔹 Tablas de Dimensión:
 - **DimTiempo:** Contiene información de año y mes de ejecución.
@@ -46,7 +48,7 @@ Además, en Power BI se utilizaron tablas adicionales como una tabla de Calendar
 
 
 ## 📊 Executive Summary
-El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en el [siguiente enlace](https://docs.google.com/document/d/1Z-9vgGaX8moGwVCZentVoH_STWcWnM5d14pcPfWJthY/edit?usp=sharing), respondiendo preguntas clave como las siguientes:
+El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes:
 
 1️⃣ **¿Cómo ha evolucionado el gasto en COVID-19 a lo largo de los años (2020-2025)?**
    - Se observó un pico de inversión en 2020 y 2021, con una disminución progresiva en los años siguientes.
