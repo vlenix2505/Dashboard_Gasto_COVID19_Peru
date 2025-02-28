@@ -6,7 +6,7 @@ _Vista de la Página Principal_
 
 
 ## 📌 Project Background
-Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, usando un código en Python.
+Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, usando un código en **Python**.
 
 Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
 
@@ -21,7 +21,7 @@ El informe está compuesto por 5 páginas:
 Puedes acceder al dashboard online en [este link](https://app.powerbi.com/view?r=eyJrIjoiMjcwZTgzNTktZWE0NS00NzI4LTljMzAtNWMxY2E4MGYwZDE1IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9&pageName=458373886d0d88309990)
 
 ## 🏗️ Data Structure
-El modelo estrella está compuesto por las siguientes tablas:
+El modelo estrella está compuesto por las siguientes tablas (Detallado a profundidad en el archivo [DocumentacionDatamart]()):
 
 ### 🔹 Tablas de Dimensión:
 - **DimTiempo:** Contiene información de año y mes de ejecución.
@@ -46,7 +46,7 @@ Además, en Power BI se utilizaron tablas adicionales como una tabla de Calendar
 
 
 ## 📊 Executive Summary
-El análisis realizado en **Power BI** permitió responder las siguientes preguntas clave:
+El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en el [siguiente enlace](https://docs.google.com/document/d/1Z-9vgGaX8moGwVCZentVoH_STWcWnM5d14pcPfWJthY/edit?usp=sharing), respondiendo preguntas clave como las siguientes:
 
 1️⃣ **¿Cómo ha evolucionado el gasto en COVID-19 a lo largo de los años (2020-2025)?**
    - Se observó un pico de inversión en 2020 y 2021, con una disminución progresiva en los años siguientes.
@@ -105,7 +105,7 @@ conn.commit()
 ```
 
 ### 🔹 Backup en Google Drive
-Antes de eliminar registros antiguos, se realiza un **backup automático** y se sube a Google Drive:
+Antes de eliminar registros antiguos, se realiza un **backup automático** y se sube a Google Drive. Considerar que se mantiene un máxima de 5 archivos en la carpeta de drive, por lo que si se excede el archivo más antiguo es eliminado. Esto se plantea para optimizar el almacenamiento de los backups:
 ```python
 df_backup = pd.read_sql("SELECT * FROM Hechos", engine)
 df_backup.to_csv(backup_file, index=False, encoding="utf-8-sig")
@@ -140,7 +140,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 ```
 
 ### 🔹 Conclusiones
-- Se logró centralizar la información del gasto COVID-19 en **SQL Server**, optimizando el análisis en **Power BI**.
+- Se implementó un datamart especializado en **SQL Server** para centralizar la información del gasto COVID-19, optimizando su consulta y análisis en **Power BI**.
 - Se implementó una estrategia de actualización **automática y transaccional**, asegurando la integridad de los datos.
 - Se habilitó un mecanismo de **backup en Google Drive** para proteger la información histórica.
 - **Python** fue utilizado como herramienta principal para la extracción, transformación y carga (ETL) de los datos.
