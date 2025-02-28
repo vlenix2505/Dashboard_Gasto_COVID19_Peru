@@ -1,4 +1,4 @@
-# Gasto COVID-19 en Perú (2020-2025)
+# COVID-19 Public Spending Analysis in Peru (2020-2025)
 
 _Vista de la Página Principal_
 
