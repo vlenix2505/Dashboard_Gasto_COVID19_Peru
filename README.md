@@ -44,6 +44,17 @@ Como resumen, el modelo estrella está compuesto por las siguientes tablas:
 
 Además, en Power BI se utilizaron tablas adicionales como una tabla de Calendario para la gestión de fechas de la dimensión tiempo (DimTiempo), tabla de medidas (Medidas) para calcular métricas clave de manera eficiente y otra tabla para almacenar la fecha de actualización del reporte (Actualización).
 
+### 🔹 Medidas DAX Implementadas:
+
+A continuación, se detallan algunas de las medidas DAX utilizadas en el análisis:
+
+- **Eficiencia del Pago (%)**: Mide la relación entre el monto girado y el ejecutado, expresado en porcentaje.  
+- **Porcentaje de Ejecución**: Calcula el porcentaje del presupuesto ejecutado con respecto al PIM.  
+- **Porcentaje Contratado**: Se obtiene dividiendo el **Monto Comprometido** entre el **PIM**, indicando el nivel de contratación del presupuesto.  
+- **Porcentaje Habilitado**: Calcula la relación entre el **Monto Certificado** y el **PIM**, reflejando cuánto del presupuesto ha sido habilitado formalmente.   
+- **Promedio Mensual Ejecutado**: Calcula el promedio mensual del gasto ejecutado a lo largo del periodo analizado.  
+- **Ranking de Departamentos por Ejecutado**: Ordena los departamentos según su nivel de ejecución del presupuesto.  
+
    ![image](https://github.com/user-attachments/assets/5eb93f94-d9df-4912-8e98-0322071c8b68)
 
 
