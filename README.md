@@ -135,27 +135,11 @@ file_drive = drive.CreateFile({
 file_drive.SetContentFile(backup_file)
 file_drive.Upload()
 ```
-
-## 📂 Additional Sections
-### 🔹 Librerías Utilizadas
-El código fue desarrollado en **Python**, con las siguientes librerías:
-```python
-import pandas as pd
-import pyodbc
-import requests
-from datetime import datetime
-from sqlalchemy import create_engine
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
-from io import StringIO
-import os
-from oauth2client.service_account import ServiceAccountCredentials
-```
-# Criterio de Actualización por Reemplazo  
+## 📌 Criterio de Actualización por Reemplazo  
 
 En este análisis se evaluó la variación de los datos en distintos intervalos de tiempo para determinar la frecuencia óptima de actualización por reemplazo en el modelo de datos. Se compararon los cambios en registros, montos y ejecución a nivel de gobierno y departamentos en periodos de 1 y 3 semanas.  
 
-## 📊 Análisis Comparativo  
+### 📊 Análisis Comparativo  
 
 ### 🔹 Variación en 1 Semana  
 - **Cantidad de registros:** +66  
@@ -189,7 +173,7 @@ En este análisis se evaluó la variación de los datos en distintos intervalos 
 - **Departamentos:**  
   - Áncash: **86.75% → 68.98%**  
 
-## ✅ Decisión: Actualización Cada 3 Semanas  
+### ✅ Decisión: Actualización Cada 3 Semanas  
 - La variación en **3 semanas** es significativamente mayor que en **1 semana**, lo que permite capturar cambios relevantes en los montos y la ejecución presupuestal.  
 - Se espera que un periodo de **1 mes** no agregue valor adicional suficiente respecto a 3 semanas.  
 - La actualización **semanal** no capta suficiente variación y genera una carga innecesaria en el procesamiento de datos.  
@@ -197,6 +181,22 @@ En este análisis se evaluó la variación de los datos en distintos intervalos 
 ### 📅 **Frecuencia de actualización:** **Cada 3 semanas**  
 Este intervalo garantiza una actualización eficiente sin perder cambios relevantes en la ejecución del presupuesto.  
 
+
+## 📂 Additional Sections
+### 🔹 Librerías Utilizadas
+El código fue desarrollado en **Python**, con las siguientes librerías:
+```python
+import pandas as pd
+import pyodbc
+import requests
+from datetime import datetime
+from sqlalchemy import create_engine
+from pydrive2.auth import GoogleAuth
+from pydrive2.drive import GoogleDrive
+from io import StringIO
+import os
+from oauth2client.service_account import ServiceAccountCredentials
+```
 
 ### 🔹 Conclusiones
 - Se implementó un datamart especializado en **SQL Server** para centralizar la información del gasto COVID-19, optimizando su consulta y análisis en **Power BI**.
