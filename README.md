@@ -151,6 +151,52 @@ from io import StringIO
 import os
 from oauth2client.service_account import ServiceAccountCredentials
 ```
+# Criterio de Actualización por Reemplazo  
+
+En este análisis se evaluó la variación de los datos en distintos intervalos de tiempo para determinar la frecuencia óptima de actualización por reemplazo en el modelo de datos. Se compararon los cambios en registros, montos y ejecución a nivel de gobierno y departamentos en periodos de 1 y 3 semanas.  
+
+## 📊 Análisis Comparativo  
+
+### 🔹 Variación en 1 Semana  
+- **Cantidad de registros:** +66  
+- **Montos:**  
+  - PIM: **+2.8%**  
+  - Devengado: **+0.005%**  
+- **Impacto en 2025:**  
+  - PIM: **+80.75%**  
+  - Devengado: **+1.35%**  
+  - Girado: **+10.58%**  
+- **Nivel de Gobierno:**  
+  - Gobierno Nacional: **87.72% → 82.8%**  
+  - Gobiernos Locales y Regionales: **sin cambios significativos**  
+- **Departamentos:**  
+  - Ayacucho: **85.31% → 96.14%**  
+  - Moquegua: **77.28% → 65.12%**  
+
+### 🔹 Variación en 3 Semanas  
+- **Cantidad de registros:** +102  
+- **Montos:**  
+  - PIM: **+14.3%**  
+  - Devengado: **+10.56%**  
+- **Impacto en 2025:**  
+  - PIM: **+82.56%**  
+  - Devengado: **+106.56%**  
+  - Girado: **+120.57%**  
+- **Nivel de Gobierno:**  
+  - Gobierno Nacional: **-4.48 pp**  
+  - Gobierno Local: **+6.34 pp**  
+  - Gobierno Regional: **-1.6 pp**  
+- **Departamentos:**  
+  - Áncash: **86.75% → 68.98%**  
+
+## ✅ Decisión: Actualización Cada 3 Semanas  
+- La variación en **3 semanas** es significativamente mayor que en **1 semana**, lo que permite capturar cambios relevantes en los montos y la ejecución presupuestal.  
+- Se espera que un periodo de **1 mes** no agregue valor adicional suficiente respecto a 3 semanas.  
+- La actualización **semanal** no capta suficiente variación y genera una carga innecesaria en el procesamiento de datos.  
+
+### 📅 **Frecuencia de actualización:** **Cada 3 semanas**  
+Este intervalo garantiza una actualización eficiente sin perder cambios relevantes en la ejecución del presupuesto.  
+
 
 ### 🔹 Conclusiones
 - Se implementó un datamart especializado en **SQL Server** para centralizar la información del gasto COVID-19, optimizando su consulta y análisis en **Power BI**.
