@@ -2,7 +2,8 @@
 
 _Vista de la Página Principal_
 
-![1-Principal](https://github.com/user-attachments/assets/4aa1d0e3-7261-48f8-9701-5f0e16604d99)
+![1-Principal](https://github.com/user-attachments/assets/9f828e43-79b2-44d5-bee0-2d1780862b04)
+
 
 
 ## 📌 Project Background
@@ -59,7 +60,7 @@ A continuación, se detallan algunas de las medidas DAX utilizadas en el anális
 
 
 ## 📊 Executive Summary
-El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes:
+El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes (resultados al 16/03/2025) :
 
 1️⃣ **¿Cómo ha evolucionado el gasto en COVID-19 a lo largo de los años (2020-2025)?**
    - Se observó un pico de inversión en 2020 y 2021, con una disminución progresiva en los años siguientes.
@@ -73,8 +74,8 @@ El análisis realizado en **Power BI** permitió atender los requisitos de negoc
 4️⃣ **¿Qué sectores y pliegos han ejecutado más recursos?**
    - **Desarrollo e Inclusión Social**, **Salud** y **Trabajo y Promoción del Empleo** lideraron el TOP 3 en la ejecución de gasto. Por otro lado, el **Ministerio de Desarrollo e Inclusión Social**, **M. de Trabajo y Promoción del Empleo y M. De Salud** encabezaron el ranking de Pliegos por gasto ejecutado 
 
-5️⃣ **¿Cómo se compara el presupuesto inicial (MONTO_PIA) con el gasto ejecutado (MONTO_DEVENGADO)?**
-   - Se logró un alto porcentaje de ejecución (91.74% en promedio), con variaciones entre sectores y años.
+5️⃣ **¿Cómo se compara el presupuesto inicial (MONTO_PIM) con el gasto ejecutado (MONTO_DEVENGADO)?**
+   - Se logró un alto porcentaje de ejecución (91.55% en promedio), con variaciones entre sectores y años.
 
 6️⃣ **¿Qué productos o proyectos han recibido más recursos?**
    - **Asignaciones Presupuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.59%.
