@@ -7,9 +7,9 @@ _Vista de la Página Principal_
 
 
 ## 📌 Project Background
-Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, usando un código en **Python**.
+Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, mediante un código en **PySpark**.
 
-Se desarrolló un modelo de datos en **estrella**, almacenado en una base de datos **SQL Server**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se implementó un mecanismo de **backup en Google Drive** para resguardar la información histórica antes de cada actualización.
+Se desarrolló un modelo de datos en estrella, almacenado en **OneLake**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se utiliza el historial de versiones de la **Delta Table Hechos** para resguardar la información histórica antes de cada actualización.
 
 El informe está compuesto por 5 páginas:
 
@@ -41,13 +41,16 @@ Como resumen, el modelo estrella está compuesto por las siguientes tablas:
   - **MONTO_DEVENGADO** (Gasto efectivamente ejecutado)
   - **MONTO_GIRADO** (Monto pagado a proveedores)
 
-    ![image](https://github.com/user-attachments/assets/676644c6-786b-4150-8acf-b3be68091cc4)
+Además, se almacena una tabla update_log que registra la última fecha y hora de actualización (se modificó el código para que use la zona horaria de Lima UTC-5 en lugar de UTC, la cual es la zona predeterminada por Fabric).
 
-Además, en Power BI se utilizaron tablas adicionales como una tabla de Calendario para la gestión de fechas de la dimensión tiempo (DimTiempo), tabla de medidas (Medidas) para calcular métricas clave de manera eficiente y otra tabla para almacenar la fecha de actualización del reporte (Actualización).
+   ![image](https://github.com/user-attachments/assets/a55427f7-3fc1-4148-97a6-04f6b2284118)
+
+
+Por otro lado, en Power BI se utilizaron tablas adicionales como una tabla de Calendario para la gestión de fechas de la dimensión tiempo (DimTiempo), tabla de medidas (Medidas) para calcular métricas clave de manera eficiente y otra tabla para almacenar la fecha de actualización del reporte (Actualización).
 
 ### 🔹 Medidas DAX Implementadas:
 
-A continuación, se detallan algunas de las medidas DAX utilizadas en el análisis:
+A continuación, se detallan algunas de las medidas DAX utilizadas en el análisis, las cuales fueron separadas por carpetas para mantener un orden general en la estructura del informe:
 
 - **Eficiencia del Pago (%)**: Mide la relación entre el monto girado y el ejecutado, expresado en porcentaje.  
 - **Porcentaje de Ejecución**: Calcula el porcentaje del presupuesto ejecutado con respecto al PIM.  
@@ -56,7 +59,8 @@ A continuación, se detallan algunas de las medidas DAX utilizadas en el anális
 - **Promedio Mensual Ejecutado**: Calcula el promedio mensual del gasto ejecutado a lo largo del periodo analizado.  
 - **Ranking de Departamentos por Ejecutado**: Ordena los departamentos según su nivel de ejecución del presupuesto.  
 
-   ![image](https://github.com/user-attachments/assets/5eb93f94-d9df-4912-8e98-0322071c8b68)
+     ![image](https://github.com/user-attachments/assets/7308ddb4-e641-48f6-9997-8fbd206ff840)
+
 
 
 ## 📊 Executive Summary
@@ -88,115 +92,134 @@ El análisis realizado en **Power BI** permitió atender los requisitos de negoc
 ## 🛠️ Technical Implementation
 
 ### 🔹 Extracción de Datos
-Los datos se obtienen desde archivos **CSV en línea** proporcionados por el MEF. Cada año tiene un archivo específico:
+Se descargan los datos desde **archivos CSV en línea** del MEF y se procesan en **PySpark**, dentro de un Notebook en Fabric:
 ```python
+# Definir periodo de tiempo
 start_year = 2020
-current_year = datetime.now().year
+current_year = 2025
 years = list(range(start_year, current_year + 1))
+ANOS_ACTUALIZAR = [2023, 2024, 2025]
+
+#Definir columnas de análisis
+columnas_requeridas = [
+    'ANO_EJE', 'MES_EJE', 'NIVEL_GOBIERNO_NOMBRE', 'SECTOR_NOMBRE',
+    'PLIEGO_NOMBRE', 'EJECUTORA_NOMBRE', 'DEPARTAMENTO_EJECUTORA_NOMBRE',
+    'PROVINCIA_EJECUTORA_NOMBRE', 'DISTRITO_EJECUTORA_NOMBRE',
+    'PROGRAMA_PPTO_NOMBRE', 'TIPO_ACT_PROY_NOMBRE',
+    'PRODUCTO_PROYECTO_NOMBRE', 'ACTIVIDAD_ACCION_OBRA_NOMBRE', 'MONTO_PIA',
+    'MONTO_PIM', 'MONTO_CERTIFICADO', 'MONTO_COMPROMETIDO_ANUAL',
+    'MONTO_COMPROMETIDO', 'MONTO_DEVENGADO', 'MONTO_GIRADO'
+]
 
 dfs = []
+
 for year in years:
-    url = f'https://fs.datosabiertos.mef.gob.pe/datastorefiles/{year}-Gasto-COVID-19.csv'
-    
+    url_csv = f'https://fs.datosabiertos.mef.gob.pe/datastorefiles/{year}-Gasto-COVID-19.csv'    
     try:
-        response = requests.get(url, verify=False, timeout=10)
-        response.raise_for_status()
-        df_year = pd.read_csv(StringIO(response.text))
-        df_year = df_year[columnas_requeridas]
-        dfs.append(df_year)
-        print(f"Datos de {year} descargados correctamente. Registros: {len(df_year)}")
-    except requests.exceptions.RequestException as e:
+        response = requests.get(url_csv, verify=False, timeout=10)
+        response.raise_for_status()        
+        df_pandas = pd.read_csv(StringIO(response.text), usecols=columnas_requeridas, low_memory=False)
+        df_spark = spark.createDataFrame(df_pandas)        
+        dfs.append(df_spark)
+        print(f"Datos de {year} descargados correctamente. Registros: {df_spark.count()}")
+    except Exception as e:
         print(f"Error al descargar {year}: {e}")
+
+if dfs:
+    df = reduce(lambda df1, df2: df1.union(df2), dfs)
+    print(f"Datos totales obtenidos: {df.count()} registros.")
 ```
-Los datos extraídos se almacenan en **SQL Server** utilizando **PyODBC** y **SQLAlchemy**.
 
 ### 🔹 Carga y Transformación
-Se utiliza un esquema **transaccional (BEGIN, COMMIT, ROLLBACK)** para evitar inconsistencias en la base de datos. Además, se eliminan los datos previos en cada actualización:
+La información se almacena en **OneLake** en formato Delta Table, con historial de versiones:
 ```python
-cursor.execute("BEGIN TRANSACTION")
-cursor.execute("DELETE FROM Hechos")
-conn.commit()
+# Ruta de la Tabla Hechos
+ruta_hechos = "Tables/Hechos"
+
+# Insertar registros nuevos en la tabla Hechos
+        df_hechos_nuevo.write.format("delta") \
+            .mode("append") \
+            .partitionBy("id_tiempo") \
+            .save(ruta_hechos)
+
+ # Ver historial después de la inserción/actualización
+        print("📌 Historial de versiones de la tabla Hechos después de la actualización:")
+        hechos_delta.history().select("version", "timestamp", "operation").show(5)
 ```
 
-### 🔹 Backup en Google Drive
-Antes de eliminar registros antiguos, se realiza un **backup automático** y se sube a Google Drive. Considerar que se mantiene un máxima de 5 archivos en la carpeta de drive, por lo que si se excede el archivo más antiguo es eliminado. Esto se plantea para optimizar el almacenamiento de los backups:
-```python
-df_backup = pd.read_sql("SELECT * FROM Hechos", engine)
-df_backup.to_csv(backup_file, index=False, encoding="utf-8-sig")
-gauth = GoogleAuth()
-    gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        "service_account.json",
-        ["https://www.googleapis.com/auth/drive"]
-    )
-drive = GoogleDrive(gauth)
-file_drive = drive.CreateFile({
-        'title': backup_file,
-        'parents': [{'id': folder_id}]
-    })
-file_drive.SetContentFile(backup_file)
-file_drive.Upload()
-```
 ## 📌 Criterio de Actualización por Reemplazo  
+Se eligió un criterio de actualización parcial por reemplazo basado en la variabilidad de los datos:
+- Los datos de **2020 a 2022** no han cambiado desde su última actualización.
+- Solo se eliminan y reemplazan los registros de **2023, 2024 y 2025**.
+- Esto optimiza el procesamiento y evita cambios innecesarios en el historial de versiones.
 
-En este análisis se evaluó la variación de los datos en distintos intervalos de tiempo para determinar la frecuencia óptima de actualización por reemplazo en el modelo de datos. Se compararon los cambios en registros, montos y ejecución a nivel de gobierno y departamentos en periodos de 1 y 3 semanas.  
+En cada ejecución:
+- Se eliminan registros de **2023, 2024 y 2025** en la Delta Table.
+- Se insertan los datos actualizados para esos años.
+- Se actualiza la tabla **update_log** para reflejar la nueva fecha de actualización en el informe de Power BI.
 
-### 📊 Análisis Comparativo  
+## 🔄 Flujo de Actualización en Data Factory
+El proceso de actualización en **Data Factory** sigue una serie de pasos diseñados para garantizar la consistencia y confiabilidad de los datos. 
 
-### 🔹 Variación en 1 Semana  
-- **Cantidad de registros:** +66  
-- **Montos:**  
-  - PIM: **+2.8%**  
-  - Devengado: **+0.005%**  
-- **Impacto en 2025:**  
-  - PIM: **+80.75%**  
-  - Devengado: **+1.35%**  
-  - Girado: **+10.58%**  
-- **Nivel de Gobierno:**  
-  - Gobierno Nacional: **87.72% → 82.8%**  
-  - Gobiernos Locales y Regionales: **sin cambios significativos**  
-- **Departamentos:**  
-  - Ayacucho: **85.31% → 96.14%**  
-  - Moquegua: **77.28% → 65.12%**  
+_Vista del Data Pipeline_
 
-### 🔹 Variación en 3 Semanas  
-- **Cantidad de registros:** +102  
-- **Montos:**  
-  - PIM: **+14.3%**  
-  - Devengado: **+10.56%**  
-- **Impacto en 2025:**  
-  - PIM: **+82.56%**  
-  - Devengado: **+106.56%**  
-  - Girado: **+120.57%**  
-- **Nivel de Gobierno:**  
-  - Gobierno Nacional: **-4.48 pp**  
-  - Gobierno Local: **+6.34 pp**  
-  - Gobierno Regional: **-1.6 pp**  
-- **Departamentos:**  
-  - Áncash: **86.75% → 68.98%**  
+![image](https://github.com/user-attachments/assets/32630424-6f6f-47fa-a7a1-bee41bd18e57)
 
-### ✅ Decisión: Actualización Cada 3 Semanas  
-- La variación en **3 semanas** es significativamente mayor que en **1 semana**, lo que permite capturar cambios relevantes en los montos y la ejecución presupuestal.  
-- Se espera que un periodo de **1 mes** no agregue valor adicional suficiente respecto a 3 semanas.  
-- La actualización **semanal** no capta suficiente variación y genera una carga innecesaria en el procesamiento de datos.  
 
-### 📅 **Frecuencia de actualización:** **Cada 3 semanas**  
-Este intervalo garantiza una actualización eficiente sin perder cambios relevantes en la ejecución del presupuesto.  
+A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:  
+1. **Notebook de Actualización**  
+   - Se ejecuta un **notebook en Fabric** llamado **Update_GastoCovid** que extrae y transforma los datos más recientes en OneLake.  
+   - En caso de error, se captura un mensaje de error y se procede a restaurar la última versión válida al ejecutar el **Script_Restore**, el cual verifica que si hay suficientes versiones para restaurar y ha ocurrido una operación DELETE sin que sea seguida de un WRITE, procede a usar el versioning del Delta Table para restaurar la versión anterior.
+
+```python
+  if hubo_delete_sin_write:
+        print(f"🚨 Se detectó un DELETE sin un posterior WRITE en la última ejecución.")
+        print(f"🔄 Restaurando a la versión {version_anterior}...")
+
+        # Restaurar tabla
+        spark.sql(f"RESTORE TABLE delta.`{ruta_lakehouse}` TO VERSION AS OF {version_anterior}")
+
+        print("✅ Restauración completada. Verificando datos...")
+        spark.read.format("delta").load(ruta_lakehouse).show(10)
+    else:
+        print(f"✅ La última operación fue '{operacion_actual}', no se restaurará nada.")
+```
+
+2. **Actualización del Modelo Semántico**  
+   - A pesar de que Power BI utiliza **DirectQuery**, el modelo semántico se actualiza para reflejar cambios en la estructura de datos o ajustes en medidas DAX.  
+   - Si la actualización falla, se capturan los detalles del error en una variable establecida y se notifica por correo electrónico.  
+
+3. **Notificación por Correo Electrónico**  
+   - Se envían correos de confirmación cuando la actualización es exitosa a las cuentas establecidas en la configuración de la actividad.  
+   - En caso de error en la ejecución del **notebook** o la actualización del modelo semántico, se notifica automáticamente con los detalles del fallo.  
+
+![mensajeCorreo](https://github.com/user-attachments/assets/efcfc8c4-8729-4ed4-9ba0-5d0337016922)
+
+
+4. **Programación**  
+   - Se ha programado el pipeline para que se ejecute 3 veces por semana (Lunes, Miércoles y Viernes) a una determinada hora.
+   - Considerar que la zona horaria varía según la región del usuario, en este caso, se escogió **(UTC-05:00) Bogotá, Lima, Quito**
+     
+![image](https://github.com/user-attachments/assets/08133deb-9a69-421a-9385-58543f0642ca)
 
 
 ## 📂 Additional Sections
 ### 🔹 Librerías Utilizadas
-El código fue desarrollado en **Python**, con las siguientes librerías:
+El código fue desarrollado en **PySpark**, con las siguientes librerías:
 ```python
-import pandas as pd
-import pyodbc
 import requests
-from datetime import datetime
-from sqlalchemy import create_engine
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
-from io import StringIO
+import pandas as pd
 import os
-from oauth2client.service_account import ServiceAccountCredentials
+from pyspark.sql.functions import col, when, lit, to_date, concat, lpad
+from io import StringIO
+from pyspark.sql.functions import col
+from functools import reduce
+from delta.tables import DeltaTable
+from pyspark.sql.window import Window
+from pyspark.sql.utils import AnalysisException
+from pyspark.sql.functions import row_number, monotonically_increasing_id, col, max as spark_max
+import pytz
+from datetime import datetime
 ```
 
 ### 🔹 Conclusiones
