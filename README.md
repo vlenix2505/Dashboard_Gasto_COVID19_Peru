@@ -19,7 +19,7 @@ El informe está compuesto por 5 páginas:
 - [Sectores](paginasPowerBI/4-Sectores.jpg): Página que muestra la distribución del gasto COVID-19 por sector, destacando a Salud y Desarrollo e Inclusión Social como los principales ejecutores de recursos.
 - [Actividad](paginasPowerBI/5-Actividad.jpg): Página que analiza el gasto según programas y actividades, resaltando donde se efectuaron las mayores inversiones.
 
-Puedes acceder al dashboard online en [este link](https://app.powerbi.com/view?r=eyJrIjoiMjcwZTgzNTktZWE0NS00NzI4LTljMzAtNWMxY2E4MGYwZDE1IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9&pageName=458373886d0d88309990)
+Puedes acceder al dashboard online en [este link](https://iced-bandicoot-b1d.notion.site/Reporte-de-Power-BI-Ejecuci-n-del-Gasto-COVID-19-en-Per-1c063f84a86180b7a06edb00823a39c7?pvs=4)
 
 ## 🏗️ Data Structure
 La estructura de los datos se encuentra profundamente detallada en el archivo de [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf). 
