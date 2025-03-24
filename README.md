@@ -208,7 +208,7 @@ A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:
 
 
 4. **Programación**  
-   - Se ha programado el pipeline para que se ejecute 3 veces por semana (Lunes, Miércoles y Sábados) a una determinada hora.
+   - Se ha programado el pipeline para que se ejecute 3 veces por semana (Lunes, Miércoles y Sábados) a una determinada hora (11:00 am).
    - Considerar que la zona horaria varía según la región del usuario, en este caso, se escogió **(UTC-05:00) Bogotá, Lima, Quito**
 
 <p align="center" width="100%">
