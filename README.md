@@ -193,6 +193,11 @@ A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:
    - A pesar de que Power BI utiliza **DirectQuery**, el modelo semántico se actualiza para reflejar cambios en la estructura de datos o ajustes en medidas DAX.  
    - Si la actualización falla, se capturan los detalles del error en una variable establecida y se notifica por correo electrónico.  
 
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/aeb0dc46-3e22-4b23-9180-8d08dc5dbc70"> 
+</p>
+
+
 3. **Notificación por Correo Electrónico**  
    - Se envían correos de confirmación cuando la actualización es exitosa a las cuentas establecidas en la configuración de la actividad.  
    - En caso de error en la ejecución del **notebook** o la actualización del modelo semántico, se notifica automáticamente con los detalles del fallo.
@@ -207,7 +212,7 @@ A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:
    - Considerar que la zona horaria varía según la región del usuario, en este caso, se escogió **(UTC-05:00) Bogotá, Lima, Quito**
 
 <p align="center" width="100%">
-    <img src="https://github.com/user-attachments/assets/a42ea109-de1c-409e-abd2-f93831b6b5c1"> 
+    <img src="https://github.com/user-attachments/assets/e58a4035-5274-4194-ba2b-c7a77224cd1e"> 
 </p>
 
 
