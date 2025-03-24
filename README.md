@@ -43,8 +43,9 @@ Como resumen, el modelo estrella está compuesto por las siguientes tablas:
 
 Además, se almacena una tabla update_log que registra la última fecha y hora de actualización (se modificó el código para que use la zona horaria de Lima UTC-5 en lugar de UTC, la cual es la zona predeterminada por Fabric).
 
-   ![image](https://github.com/user-attachments/assets/a55427f7-3fc1-4148-97a6-04f6b2284118)
-
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/a55427f7-3fc1-4148-97a6-04f6b2284118"> 
+</p>   
 
 Por otro lado, en Power BI se utilizaron tablas adicionales como una tabla de Calendario para la gestión de fechas de la dimensión tiempo (DimTiempo), tabla de medidas (Medidas) para calcular métricas clave de manera eficiente y otra tabla para almacenar la fecha de actualización del reporte (Actualización).
 
@@ -59,9 +60,10 @@ A continuación, se detallan algunas de las medidas DAX utilizadas en el anális
 - **Promedio Mensual Ejecutado**: Calcula el promedio mensual del gasto ejecutado a lo largo del periodo analizado.  
 - **Ranking de Departamentos por Ejecutado**: Ordena los departamentos según su nivel de ejecución del presupuesto.  
 
-     ![image](https://github.com/user-attachments/assets/7308ddb4-e641-48f6-9997-8fbd206ff840)
 
-
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/7308ddb4-e641-48f6-9997-8fbd206ff840"> 
+</p>
 
 ## 📊 Executive Summary
 El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes (resultados al 16/03/2025) :
@@ -163,7 +165,9 @@ El proceso de actualización en **Data Factory** sigue una serie de pasos diseñ
 
 _Vista del Data Pipeline_
 
-![image](https://github.com/user-attachments/assets/32630424-6f6f-47fa-a7a1-bee41bd18e57)
+<p align="left" width="100%">
+    <img src="https://github.com/user-attachments/assets/32630424-6f6f-47fa-a7a1-bee41bd18e57"> 
+</p>
 
 
 A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:  
@@ -191,16 +195,20 @@ A continuación, se describe el flujo de datos **Actualizar_Covid_Report**:
 
 3. **Notificación por Correo Electrónico**  
    - Se envían correos de confirmación cuando la actualización es exitosa a las cuentas establecidas en la configuración de la actividad.  
-   - En caso de error en la ejecución del **notebook** o la actualización del modelo semántico, se notifica automáticamente con los detalles del fallo.  
+   - En caso de error en la ejecución del **notebook** o la actualización del modelo semántico, se notifica automáticamente con los detalles del fallo.
 
-![mensajeCorreo](https://github.com/user-attachments/assets/efcfc8c4-8729-4ed4-9ba0-5d0337016922)
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/efcfc8c4-8729-4ed4-9ba0-5d0337016922"> 
+</p>
 
 
 4. **Programación**  
-   - Se ha programado el pipeline para que se ejecute 3 veces por semana (Lunes, Miércoles y Viernes) a una determinada hora.
+   - Se ha programado el pipeline para que se ejecute 3 veces por semana (Lunes, Miércoles y Sábados) a una determinada hora.
    - Considerar que la zona horaria varía según la región del usuario, en este caso, se escogió **(UTC-05:00) Bogotá, Lima, Quito**
-     
-![image](https://github.com/user-attachments/assets/08133deb-9a69-421a-9385-58543f0642ca)
+
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/a42ea109-de1c-409e-abd2-f93831b6b5c1"> 
+</p>
 
 
 ## 📂 Additional Sections
@@ -222,9 +230,14 @@ import pytz
 from datetime import datetime
 ```
 
-### 🔹 Conclusiones
-- Se implementó un datamart especializado en **SQL Server** para centralizar la información del gasto COVID-19, optimizando su consulta y análisis en **Power BI**.
-- Se implementó una estrategia de actualización **automática y transaccional**, asegurando la integridad de los datos.
-- Se habilitó un mecanismo de **backup en Google Drive** para proteger la información histórica.
-- **Python** fue utilizado como herramienta principal para la extracción, transformación y carga (ETL) de los datos.
-- Este proyecto proporciona una visión completa del impacto financiero del COVID-19 en el Perú, considerando factores clave como el tiempo, geografía, entidad y actividad realizada, lo cual facilita la toma de decisiones informadas en futuras crisis sanitarias.
+### 🔹 Conclusiones (Actualizadas)  
+
+- Se implementó un **datamart especializado en Microsoft Fabric**, almacenando los datos en **OneLake** mediante **Delta Tables**, lo que optimiza la consulta y análisis en **Power BI** sin necesidad de un gateway local.  
+- Se diseñó un **flujo automatizado de actualización** en **Data Factory**, eliminando la dependencia de una ejecución manual y asegurando la disponibilidad de datos actualizados sin intervención del usuario.  
+- Se aplicó un **versionado de datos** en Delta Tables, permitiendo mantener un historial de cambios y recuperar versiones anteriores en caso necesario.  
+- Se implementó una lógica de actualización eficiente: las **dimensiones solo insertan nuevos registros**, mientras que la **tabla de hechos se reemplaza parcialmente** para reflejar los datos más recientes sin afectar el histórico.  
+- **PySpark** fue utilizado para la extracción, transformación y carga (ETL) de los datos, aprovechando la escalabilidad y potencia del entorno de Fabric.  
+- La conexión en la nube con **OneLake y Fabric** elimina la dependencia de mantener un **servidor local activo**, garantizando disponibilidad y mejorando la accesibilidad desde cualquier lugar.  
+- Este proyecto proporciona una visión completa del impacto financiero del COVID-19 en el Perú, analizando su evolución en el tiempo, la distribución del gasto por entidad y actividad, y la ejecución presupuestaria, facilitando la toma de decisiones estratégicas. 🚀  
+
+
