@@ -7,9 +7,11 @@ _Vista de la Página Principal_
 
 
 ## 📌 Project Background
-Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Utiliza datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde archivos CSV disponibles en línea, mediante un código en **PySpark**.
+Este proyecto tiene como objetivo analizar la ejecución del gasto relacionado con el COVID-19 en el Perú desde el año 2020 hasta 2025. Para ello, se utilizan datos abiertos del **Ministerio de Economía y Finanzas (MEF)**, extraídos desde** archivos CSV** disponibles en línea mediante un código en **PySpark**.
 
-Se desarrolló un modelo de datos en estrella, almacenado en **OneLake**, para facilitar la generación de reportes dinámicos en **Power BI**. Además, se utiliza el historial de versiones de la **Delta Table Hechos** para resguardar la información histórica antes de cada actualización.
+Para optimizar el análisis, se desarrolló un** modelo de datos en estrella**, almacenado en OneLake, lo que permite estructurar la información de manera eficiente y facilitar la generación de reportes dinámicos en **Power BI**. Además, se emplea el historial de versiones de la **Delta Table Hechos** para resguardar la información histórica antes de cada actualización, garantizando la trazabilidad de los datos.
+
+Si bien el **MEF* cuenta con la plataforma _Consulta Amigable de la Ejecución del Gasto_, esta solo permite visualizar los registros como tablas de consulta, sin herramientas gráficas avanzadas que faciliten la interpretación de tendencias y el impacto de la ejecución presupuestaria. Esta limitación puede dificultar el análisis para tomadores de decisión y ciudadanos interesados en evaluar la distribución de recursos. En este sentido, el presente proyecto busca no solo centralizar y estructurar la información, sino también ofrecer visualizaciones claras y dinámicas que permitan comprender mejor el uso del presupuesto destinado a la emergencia sanitaria.
 
 El informe está compuesto por 5 páginas:
 
