@@ -21,7 +21,7 @@ El informe está compuesto por 5 páginas:
 - [Sectores](paginasPowerBI/4-Sectores.jpg): Página que muestra la distribución del gasto COVID-19 por sector, destacando a Salud y Desarrollo e Inclusión Social como los principales ejecutores de recursos.
 - [Actividad](paginasPowerBI/5-Actividad.jpg): Página que analiza el gasto según programas y actividades, resaltando donde se efectuaron las mayores inversiones.
 
-Puedes acceder al dashboard online en [este link](https://iced-bandicoot-b1d.notion.site/Reporte-de-Power-BI-Ejecuci-n-del-Gasto-COVID-19-en-Per-1c063f84a86180b7a06edb00823a39c7?pvs=4)
+Puedes iniciar sesión con tu cuenta de Microsoft e interactuar con el dashboard online en [este link](https://iced-bandicoot-b1d.notion.site/Reporte-de-Power-BI-Ejecuci-n-del-Gasto-COVID-19-en-Per-1c063f84a86180b7a06edb00823a39c7?pvs=4)
 
 ## 🏗️ Data Structure
 La estructura de los datos se encuentra profundamente detallada en el archivo de [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf). 
@@ -68,7 +68,7 @@ A continuación, se detallan algunas de las medidas DAX utilizadas en el anális
 </p>
 
 ## 📊 Executive Summary
-El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes (resultados al 16/03/2025) :
+El análisis realizado en **Power BI** permitió atender los requisitos de negocio planteados para el caso de investigación, el cual se detalla en la [documentación del datamart](Documentación%20datamart%20-%20GastoCovidReport.pdf), respondiendo preguntas clave como las siguientes (resultados al 05/04/2025) :
 
 1️⃣ **¿Cómo ha evolucionado el gasto en COVID-19 a lo largo de los años (2020-2025)?**
    - Se observó un pico de inversión en 2020 y 2021, con una disminución progresiva en los años siguientes.
@@ -86,12 +86,12 @@ El análisis realizado en **Power BI** permitió atender los requisitos de negoc
    - Se logró un alto porcentaje de ejecución (91.55% en promedio), con variaciones entre sectores y años.
 
 6️⃣ **¿Qué productos o proyectos han recibido más recursos?**
-   - **Asignaciones Presupuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.59%.
+   - **Asignaciones Presupuestarias que no resultan en proyectos** fue el Programa Presupuestal con mayor presupuesto inicial y gasto ejecutado, alcanzando un %ejecutado del 91.55%.
 
 7️⃣ **¿Cómo se distribuye el gasto por departamentos?**
    - **Lima, La Libertad y Piura** fueron los departamentos con mayor ejecución de recursos.
    - Los departamentos amazónicos y con menor infraestructura presentaron menor ejecución presupuestaria.
-   - El TOP 3 de departamentos con mayor cantidad de Proyectos únicos fueron **Lima, Ancash** y **La Libertad**, en el orden respectivo. Sin embargo, pese a que Ancash está involucrado en 6 proyectos, ocupa el puesto 6 en el ranking de gasto ejecutado (aprox S/.522 mil), siendo el puesto 2 correspondiente a Piura, departamento con solo 11 proyectos (aprox S/.654 mil).
+   - El TOP 3 de departamentos con mayor cantidad de Proyectos únicos fueron **Lima, Ancash** y **La Libertad**, en el orden respectivo. Sin embargo, pese a que Ancash está involucrado en 33 proyectos, ocupa el puesto 6 en el ranking de gasto ejecutado (aprox S/.522 mil), siendo el puesto 3 correspondiente a Piura, departamento con solo 11 proyectos (aprox S/.654 mil).
 
 ## 🛠️ Technical Implementation
 
