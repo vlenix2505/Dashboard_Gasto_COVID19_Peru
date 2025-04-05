@@ -2,7 +2,7 @@
 
 _Vista de la Página Principal_
 
-![1-Principal](https://github.com/user-attachments/assets/9f828e43-79b2-44d5-bee0-2d1780862b04)
+![1-Principal](https://github.com/user-attachments/assets/dcac4e36-4cd9-42d7-a947-3ac4e26d8c27)
 
 
 
